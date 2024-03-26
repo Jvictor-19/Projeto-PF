@@ -19,3 +19,5 @@
 
     const ouroFelps = (lista) => (nome) => lista.filter((n) => n.name == nome).map((g) => g.gold && g.silver && g.bronze).reduce((ac,v) => ac+v,0);
     console.log(ouroFelps(lista)("Michael Phelps"))
+
+  //são apenas esboços de algumas funções que vão ser usadas no projeto
