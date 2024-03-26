@@ -1,0 +1,21 @@
+  const jogadoresDoBrasil = (lista) => lista.filter((x) => x.nationality === 'BRA').map((x) => x.name);
+    console.log(jogadoresDoBrasil(lista));
+
+    const jogadoresSergipanos = (lista, cidade) => lista.filter((x) => cidade.includes(x.city)).map((x) => x.name);
+    console.log(jogadoresSergipanos(lista, ["Sergipe"]));
+
+    const pais1 = ["BRA", "CHN"];
+
+    const quantidadesJogadores = (lista, pais) => lista.filter((x) => pais.includes(x.nationality)).map((x) => x.name).length;
+   console.log(quantidadesJogadores(lista, pais1));
+
+    const Brasil = (lista) => lista.filter((x) => x.nationality === 'BRA').length;
+    
+    const quantidadeBrasileiros = Brasil(lista);
+    console.log(`Do Brasil participaram ${quantidadeBrasileiros} pessoas`);
+
+    const quantasMedalhas = (lista, nome) => lista.filter((x) => x.name === nome && x.gold != 0 && x.silver != 0 && x.bronze != 0).reduce( (acc, x) => acc + x, 0);
+    console.log(quantasMedalhas(lista, "Michael Phelps"));
+
+    const ouroFelps = (lista) => (nome) => lista.filter((n) => n.name == nome).map((g) => g.gold && g.silver && g.bronze).reduce((ac,v) => ac+v,0);
+    console.log(ouroFelps(lista)("Michael Phelps"))
