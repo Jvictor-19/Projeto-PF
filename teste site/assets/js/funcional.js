@@ -59,7 +59,7 @@ const encontrarPrimeiroPaisAmericaLatina = (dados) =>
   dados.find((x) => x.City === "Mexico City") ? "Mexico" : "Não foi encontrada";
 
 // Exemplo de uso das funções
-lerCSV("athlete_events.csv")
+lerCSV("atletas.csv")
   .then((dados) => {
     const cidade = "Barcelona";
     const quantasMulheres = contarAtletasFemininas(dados, cidade);
