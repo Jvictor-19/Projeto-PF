@@ -1,7 +1,6 @@
 const fs = require("fs");
 const csv = require("csv-parser");
 
-// Função para ler o arquivo CSV e retornar os dados como uma Promise
 const lerCSV = (caminhoArquivo) => {
   return new Promise((resolve, reject) => {
     const resultados = [];
@@ -18,6 +17,11 @@ const lerCSV = (caminhoArquivo) => {
         reject(error);
       });
   });
+};
+
+// Função para processar as linhas do CSV
+const processarLinhas = (linha) => {
+  console.log(linha);
 };
 
 // Função para encontrar o país mais ao norte que sediou uma Olimpíada
@@ -58,10 +62,9 @@ const contarVezesCidadeSediou = (dados, cidade) =>
 const encontrarPrimeiroPaisAmericaLatina = (dados) =>
   dados.find((x) => x.City === "Mexico City") ? "Mexico" : "Não foi encontrada";
 
-// Exemplo de uso das funções
 lerCSV("atletas.csv")
   .then((dados) => {
-    const cidade = "Barcelona";
+    const cidade = "Rio de Janeiro";
     const quantasMulheres = contarAtletasFemininas(dados, cidade);
     console.log(`Em ${cidade} participaram ${quantasMulheres} mulheres.`);
 
@@ -77,3 +80,7 @@ lerCSV("atletas.csv")
   .catch((error) => {
     console.error("Erro ao ler o arquivo CSV:", error);
   });
+
+//const clear = console.log(1);
+
+// document.getElementById("RETORNO").innerHTML(contarAtletasFemininas = (, cidade))
