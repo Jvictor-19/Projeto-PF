@@ -12,9 +12,9 @@
       name="viewport"
       content="width=device-width, initial-scale=1, user-scalable=no"
     />
-    <link rel="stylesheet" href="teste site/assets/css/main.css" />
+    <link rel="stylesheet" href="./teste site/assets/css/main.css" />
     <noscript
-      ><link rel="stylesheet" href="teste site/assets/css/noscript.css"
+      ><link rel="stylesheet" href="./teste site/assets/css/noscript.css"
     /></noscript>
   </head>
   <body class="is-preload">
@@ -25,34 +25,38 @@
         <div class="content">
           <div class="inner">
             <h1>Olimpíadas</h1>
-            <p>Selecione uma pergunta abaixo referente às Olimpíadas.</p>
+            <p>Selecione uma pergunta abaixo referente às Olimpíadas</p>
           </div>
         </div>
         <nav>
           <ul>
             <li>
               <a href="#pergunta_1"
-                >Cidade mais ao norte que sediou uma edição</a
+                >Descubra quantas medalhas um país conquistou em uma edição
+                olímpica</a
               >
             </li>
             <li>
-              <a href="#pergunta_2">Quantidade de mulheres por edição</a>
+              <a href="#pergunta_2"
+                >Saiba quantas mulheres participaram em uma edição dos Jogos
+                Olímpicos</a
+              >
             </li>
             <li>
               <a href="#pergunta_3"
-                >Primeira Olimpíada a ser realizada na região da Ásia
-                Oriental</a
+                >Veja o número total de atletas que competiram em uma edição das
+                Olimpíadas</a
               >
             </li>
             <li>
               <a href="#pergunta_4"
-                >Primeira cidade na América Latina a sediar os Jogos Olímpicos
-                de Verão</a
+                >Confira os anos em que uma cidade sediou os Jogos Olímpicos</a
               >
             </li>
             <li>
               <a href="#pergunta_5"
-                >Vezes que uma determinada cidade sediou as Olimpíadas</a
+                >Descubra quantas vezes uma cidade específica foi sede dos Jogos
+                Olímpicos</a
               >
             </li>
           </ul>
@@ -63,16 +67,31 @@
       <div id="main">
         <!-- Pergunta 1 -->
         <article id="pergunta_1">
-          <h2 class="major">Cidade mais ao norte que</h2>
-          <h2 class="major">sediou uma edição</h2>
-          <span class="image main"><img src="images/pic01.jpg" alt="" /></span>
-          <p>TEXTO + RETORNO DO CODIGO</p>
+          <h2 class="major">Descubra quantas medalhas</h2>
+          <h2 class="major">um país conquistou em</h2>
+          <h2 class="major">uma edição olímpica</h2>
+          <span class="image main"
+            ><img src="./images/medalhas.jpg" alt=""
+          /></span>
+          <label for="title">Digite uma cidade</label>
+          <div id="searchContainer">
+            <input
+              type="text"
+              id="searchInput"
+              placeholder="Pesquise a cidade aqui..."
+            />
+            <ul id="searchResults"></ul>
+          </div>
+          <label id="resultado1"></label>
+          <script location.reload()></script>
         </article>
 
         <!-- pergunta_2 -->
         <article id="pergunta_2">
-          <h2 class="major">Quantidade de mulheres</h2>
-          <h2 class="major">por edição</h2>
+          <h2 class="major">Saiba quantas mulheres</h2>
+          <h2 class="major">participaram em uma edição</h2>
+          <h2 class="major">dos Jogos Olímpicos</h2>
+
           <span class="image main"
             ><img src="images/mulheres.jpg" alt=""
           /></span>
@@ -85,31 +104,16 @@
             />
             <ul id="searchResults"></ul>
           </div>
+          <label id="resultado2"></label>
         </article>
 
         <!-- pergunta_3 -->
         <article id="pergunta_3">
-          <h2 class="major">Primeira Olimpíada a ser</h2>
-          <h2 class="major">realizada na região da</h2>
-          <h2 class="major">Ásia Oriental</h2>
-          <span class="image main"><img src="images/pic03.jpg" alt="" /></span>
-          <p>TEXTO + RETORNO DO CODIGO</p>
-        </article>
-
-        <!-- pergunta_4 -->
-        <article id="pergunta_4">
-          <h2 class="major">Primeira cidade na</h2>
-          <h2 class="major">América Latina a sediar os</h2>
-          <h2 class="major">Jogos Olímpicos de Verão</h2>
-          <span class="image main"><img src="images/pic03.jpg" alt="" /></span>
-          <p>TEXTO + RETORNO DO CODIGO</p>
-        </article>
-
-        <!-- pergunta_5 -->
-        <article id="pergunta_5">
-          <h2 class="major">Vezes que uma determinada</h2>
-          <h2 class="major">cidade sediou as olimpíada</h2>
-          <span class="image main"><img src="images/pic03.jpg" alt="" /></span>
+          <h2 class="major">Veja o número total de</h2>
+          <h2 class="major">atletas que competiram em</h2>
+          <h2 class="major">uma edição das Olimpíadas</h2>
+          <span class="image main"><img src="" alt="" /></span>
+          <label for="title">Digite uma cidade</label>
           <div id="searchContainer">
             <input
               type="text"
@@ -118,9 +122,40 @@
             />
             <ul id="searchResults"></ul>
           </div>
-          <ul class="actions">
-            <li><input type="reset" value="Reset" /></li>
-          </ul>
+        </article>
+
+        <!-- pergunta_4 -->
+        <article id="pergunta_4">
+          <h2 class="major">Confira os anos em que</h2>
+          <h2 class="major">uma cidade sediou os</h2>
+          <h2 class="major">Jogos Olímpicos</h2>
+          <span class="image main"><img src="" alt="" /></span>
+          <label for="title">Digite uma cidade</label>
+          <div id="searchContainer">
+            <input
+              type="text"
+              id="searchInput"
+              placeholder="Pesquise a cidade aqui..."
+            />
+            <ul id="searchResults"></ul>
+          </div>
+        </article>
+
+        <!-- pergunta_5 -->
+        <article id="pergunta_5">
+          <h2 class="major">Descubra quantas vezes</h2>
+          <h2 class="major">uma cidade específica foi</h2>
+          <h2 class="major">sede dos Jogos Olímpicos</h2>
+          <span class="image main"><img src="" alt="" /></span>
+          <label for="title">Digite uma cidade</label>
+          <div id="searchContainer">
+            <input
+              type="text"
+              id="searchInput"
+              placeholder="Pesquise a cidade aqui..."
+            />
+            <ul id="searchResults"></ul>
+          </div>
         </article>
       </div>
 
@@ -137,8 +172,8 @@
       </footer>
     </div>
 
-    <!-- BG -->
-    <div id="bg"></div>
+    <!-- fundo -->
+    <div id="fundo"></div>
 
     <!-- Scripts -->
     <script src="teste site/assets/js/jquery.min.js"></script>

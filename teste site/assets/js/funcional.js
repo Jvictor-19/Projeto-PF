@@ -1,6 +1,7 @@
 const fs = require("fs");
 const csv = require("csv-parser");
 
+// Função para ler o arquivo CSV e retornar os dados como uma Promise
 const lerCSV = (caminhoArquivo) => {
   return new Promise((resolve, reject) => {
     const resultados = [];
@@ -19,30 +20,12 @@ const lerCSV = (caminhoArquivo) => {
   });
 };
 
-// Função para processar as linhas do CSV
-const processarLinhas = (linha) => {
-  console.log(linha);
-};
-
-// Função para encontrar o país mais ao norte que sediou uma Olimpíada
-const encontrarPaisMaisAoNorte = (dados) => {
-  return dados.reduce((pais, registro) => {
-    if (registro.Team === "Finland") {
-      return registro.Team;
-    }
-    return pais;
-  }, "");
-};
-
-// Função para encontrar a primeira Olimpíada sediada na Ásia Oriental
-const encontrarPrimeiraOlimpiadaAsiaOriental = (dados) => {
-  return dados.reduce((pais, registro) => {
-    if (registro.Team === "Japan") {
-      return registro.Team;
-    }
-    return pais;
-  }, "");
-};
+// Função para contar quantas vezes uma cidade sediou os Jogos Olímpicos
+const contarVezesCidadeSediou = (dados, cidade) =>
+  dados
+    .filter((x) => x.City === cidade)
+    .map((x) => x.Games)
+    .filter((value, index, self) => self.indexOf(value) === index).length;
 
 // Função para contar quantas atletas femininas participaram em uma cidade
 const contarAtletasFemininas = (dados, cidade) =>
@@ -51,36 +34,61 @@ const contarAtletasFemininas = (dados, cidade) =>
     .map((x) => x.Name)
     .filter((value, index, self) => self.indexOf(value) === index).length;
 
-// Função para contar quantas vezes uma cidade sediou os Jogos Olímpicos
-const contarVezesCidadeSediou = (dados, cidade) =>
+// Função para contar a quantidade de jogadores em uma cidade
+const quantidadeJogadores = (dados, cidade) =>
   dados
-    .filter((x) => x.City === cidade)
-    .map((x) => x.Games)
-    .filter((value, index, self) => self.indexOf(value) === index).length;
+    .filter((x) => x.City == cidade)
+    .map((x) => x.Name)
+    .reduce((nomeSemRepetir, nome) => {
+      if (!nomeSemRepetir.includes(nome)) {
+        nomeSemRepetir.push(nome);
+      }
+      return nomeSemRepetir;
+    }, []).length;
 
-// Função para encontrar o primeiro país da América Latina a sediar os Jogos Olímpicos
-const encontrarPrimeiroPaisAmericaLatina = (dados) =>
-  dados.find((x) => x.City === "Mexico City") ? "Mexico" : "Não foi encontrada";
+// Função para obter os anos em que uma cidade sediou os Jogos Olímpicos
+const anosSediados = (dados, cidade) =>
+  dados
+    .filter((x) => x.City == cidade)
+    .map((x) => x.Year)
+    .reduce((anos, ano) => {
+      if (!anos.includes(ano)) {
+        anos.push(ano);
+      }
+      return anos;
+    }, []);
 
-lerCSV("atletas.csv")
+// Função para contar quantas medalhas um país ganhou em uma cidade
+const quantasMedalhas = (pais, cidade, dados) =>
+  dados
+    .filter((x) => x.Team == pais)
+    .filter((x) => x.City == cidade)
+    .map((x) => (x.Medal != "NA" ? 1 : 0))
+    .reduce((acc, x) => acc + x, 0);
+
+// Lê o arquivo CSV e executa as operações desejadas
+lerCSV("./banco/atletas.csv")
   .then((dados) => {
-    const cidade = "Rio de Janeiro";
+    const cidade = "London";
     const quantasMulheres = contarAtletasFemininas(dados, cidade);
-    console.log(`Em ${cidade} participaram ${quantasMulheres} mulheres.`);
+    console.log(
+      `Na cidade ${cidade} participaram ${quantasMulheres} mulheres.`
+    );
 
     const cidadesediou = "London";
     const VezesQueaCidadeSediou = contarVezesCidadeSediou(dados, cidadesediou);
     console.log(`${cidadesediou} sediou ${VezesQueaCidadeSediou} vezes.`);
 
-    const PaisAmericaLatina = encontrarPrimeiroPaisAmericaLatina(dados);
-    console.log(
-      `O primeiro país da América Latina a sediar os Jogos de Verão foi o ${PaisAmericaLatina} em 1968 com sua cidade sede a Cidade do México.`
-    );
+    const a = quantidadeJogadores(dados, "Rio de Janeiro");
+    console.log(`Na cidade ${cidade} participaram ${a} atletas.`);
+
+    const ano = anosSediados(dados, "London");
+    console.log(`${ano}`);
+
+    const b = quantasMedalhas("United States", "Rio de Janeiro", dados);
+    console.log(b);
+    document.getElementById("resultado1").innerHTML = b;
   })
   .catch((error) => {
     console.error("Erro ao ler o arquivo CSV:", error);
   });
-
-//const clear = console.log(1);
-
-// document.getElementById("RETORNO").innerHTML(contarAtletasFemininas = (, cidade))

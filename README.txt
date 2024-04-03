@@ -1,21 +1,14 @@
-Dimension by HTML5 UP
-html5up.net | @ajlkn
-Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+Descrição: Esse site exibe curiosidades sobre as Olimpíadas. 
+Ele apresenta cinco seções com perguntas sobre o evento esportivo, 
+como o número de medalhas conquistadas por um país em uma edição olímpica, 
+a quantidade de mulheres que participaram, o total de atletas que competiram, entre outras informações. 
+Cada pergunta é acompanhada por uma imagem ilustrativa acerca do assunto e um campo de pesquisa
+onde o usuário pode inserir o nome de uma cidade para obter informações específicas.
 
-
-This is Dimension, a fun little one-pager with modal-ized (is that a word?) "pages"
-and a cool depth effect (click on a menu item to see what I mean). Simple, fully
-responsive, and kitted out with all the usual pre-styled elements you'd expect.
-Hope you dig it :)
-
-Demo images* courtesy of Unsplash, a radtastic collection of CC0 (public domain) images
-you can use for pretty much whatever.
-
-(* = not included)
-
-AJ
-aj@lkn.io | @ajlkn
-
+Integrantes:
+Euler Cruz da Silva - eulercruz458
+João Victor Pereira Santos - Jvictor-19
+José Victor Ribeiro de Jesus - josevic01
 
 Credits:
 

@@ -1216,7 +1216,7 @@ button {
 
 /* BG */
 
-#bg {
+#fundo {
   -moz-transform: scale(1);
   -webkit-transform: scale(1);
   -ms-transform: scale(1);
@@ -1230,8 +1230,8 @@ button {
   z-index: 1;
 }
 
-#bg:before,
-#bg:after {
+#fundo:before,
+#fundo:after {
   content: "";
   display: block;
   position: absolute;
@@ -1241,7 +1241,7 @@ button {
   height: 100%;
 }
 
-#bg:before {
+#fundo:before {
   -moz-transition: background-color 2.5s ease-in-out;
   -webkit-transition: background-color 2.5s ease-in-out;
   -ms-transition: background-color 2.5s ease-in-out;
@@ -1262,7 +1262,7 @@ button {
   z-index: 2;
 }
 
-#bg:after {
+#fundo:after {
   -moz-transform: scale(1.125);
   -webkit-transform: scale(1.125);
   -ms-transform: scale(1.125);
