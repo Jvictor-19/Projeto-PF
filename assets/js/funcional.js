@@ -19,13 +19,23 @@ const lerCSV = (caminhoArquivo) => {
       });
   });
 };
+//Função para descobrir se um país ganhou uma medalha de ouro em uma edição
+const paiscommedalhadeouro = (pais, cidade, dados) => {
+    const medalha = dados
+        .filter((x) => x.Team === pais && x.City === cidade) // Filtra os dados para o país e cidade especificados
+        .reduce((acc, atual) => {
+            if (atual.Medal === "Gold") {
+                return true; // Se encontrar uma medalha de ouro, retorna true
+            }
+            return acc; // Caso contrário, mantém o valor anterior de acc
+        }, false); // Inicializa o acumulador como false
 
-// Função para contar quantas vezes uma cidade sediou os Jogos Olímpicos
-const contarVezesCidadeSediou = (dados, cidade) =>
-  dados
-    .filter((x) => x.City === cidade)
-    .map((x) => x.Games)
-    .filter((value, index, self) => self.indexOf(value) === index).length;
+    if (medalha) {
+        return `O país ${pais} obteve medalha de ouro na edição de ${cidade}.`;
+    } else {
+        return `O país ${pais} não obteve medalha de ouro na edição de ${cidade}.`;
+    }
+};
 
 // Função para contar quantas atletas femininas participaram em uma cidade
 const contarAtletasFemininas = (dados, cidade) =>
@@ -75,9 +85,8 @@ lerCSV("atletas.csv")
       `Na cidade ${cidade} participaram ${quantasMulheres} mulheres.`
     );
 
-    const cidadesediou = "London";
-    const VezesQueaCidadeSediou = contarVezesCidadeSediou(dados, cidadesediou);
-    console.log(`${cidadesediou} sediou ${VezesQueaCidadeSediou} vezes.`);
+    const medalhadeouro = paiscommedalhadeouro("Brazil","London",dados)
+    console.log(medalhadeouro)
 
     const a = quantidadeJogadores(dados, "Rio de Janeiro");
     console.log(`Na cidade ${cidade} participaram ${a} atletas.`);
@@ -85,8 +94,8 @@ lerCSV("atletas.csv")
     const ano = anosSediados(dados, "London");
     console.log(`${ano}`);
 
-    const b = quantasMedalhas("United States", "Rio de Janeiro", dados);
-    console.log(b);
+    const quantidadeMedalhas = quantasMedalhas("United States", "Rio de Janeiro", dados);
+    console.log(quantidadeMedalhas);
   })
   .catch((error) => {
     console.error("Erro ao ler o arquivo CSV:", error);
