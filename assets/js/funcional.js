@@ -1,100 +1,128 @@
-const fs = require("fs");
-const csv = require("csv-parser");
+document.addEventListener("DOMContentLoaded", () => {
+  const filePath = "./atletas.csv";
 
-// Função para ler o arquivo CSV e retornar os dados como uma Promise
-const lerCSV = (caminhoArquivo) => {
-  return new Promise((resolve, reject) => {
-    const resultados = [];
-    fs.createReadStream(caminhoArquivo)
-      .pipe(csv())
-      .on("data", (linha) => {
-        resultados.push(linha);
-      })
-      .on("end", () => {
-        resolve(resultados);
-      })
-      .on("error", (error) => {
-        console.error("Erro ao ler o arquivo CSV:", error);
-        reject(error);
-      });
-  });
-};
+  const processarCSV = (CSVlinha) => {
+    const linhas = CSVlinha.split(/\r?\n/);
+    const cabecalho = linhas[0]
+      .split(",")
+      .map((elemento) => elemento.replace(/["]/g, ""));
 
-// Função para contar quantas vezes uma cidade sediou os Jogos Olímpicos
-const contarVezesCidadeSediou = (dados, cidade) =>
-  dados
-    .filter((x) => x.City === cidade)
-    .map((x) => x.Games)
-    .filter((value, index, self) => self.indexOf(value) === index).length;
+    const dados = linhas.slice(1).map((linha) => {
+      const valores = linha
+        .split(",")
+        .map((elemento) => elemento.replace(/["]/g, ""));
+      return cabecalho.reduce((obj, key, index) => {
+        obj[key] = valores[index];
+        return obj;
+      }, {});
+    });
 
-// Função para contar quantas atletas femininas participaram em uma cidade
-const contarAtletasFemininas = (dados, cidade) =>
-  dados
-    .filter((x) => x.City === cidade && x.Sex === "F")
-    .map((x) => x.Name)
-    .filter((value, index, self) => self.indexOf(value) === index).length;
+    return dados;
+  };
 
-// Função para contar a quantidade de jogadores em uma cidade
-const quantidadeJogadores = (dados, cidade) =>
-  dados
-    .filter((x) => x.City == cidade)
-    .map((x) => x.Name)
-    .reduce((nomeSemRepetir, nome) => {
-      if (!nomeSemRepetir.includes(nome)) {
-        nomeSemRepetir.push(nome);
+  const lerCSV = async (filePath) => {
+    try {
+      const response = await fetch(filePath);
+      if (!response.ok) {
+        throw new Error(`Erro ao ler o arquivo CSV: ${response.status}`);
       }
-      return nomeSemRepetir;
-    }, []).length;
+      const CSVlinha = await response.text();
+      return processarCSV(CSVlinha);
+    } catch (error) {
+      console.error("Erro ao ler o arquivo CSV:", error);
+      return [];
+    }
+  };
 
-// Função para obter os anos em que uma cidade sediou os Jogos Olímpicos
-const anosSediados = (dados, cidade) =>
-  dados
-    .filter((x) => x.City == cidade)
-    .map((x) => x.Year)
-    .reduce((anos, ano) => {
-      if (!anos.includes(ano)) {
-        anos.push(ano);
-      }
-      return anos;
-    }, []);
+  // Função para contar quantas vezes uma cidade sediou os Jogos Olímpicos
+  const contarVezesCidadeSediou = (dados, cidade) =>
+    dados
+      .filter((x) => x.City === cidade)
+      .map((x) => x.Games)
+      .filter((value, index, self) => self.indexOf(value) === index).length;
 
-// Função para contar quantas medalhas um país ganhou em uma cidade
-const quantasMedalhas = (pais, cidade, dados) =>
-  dados
-    .filter((x) => x.Team == pais)
-    .filter((x) => x.City == cidade)
-    .map((x) => (x.Medal != "NA" ? 1 : 0))
-    .reduce((acc, x) => acc + x, 0);
+  // Função para contar quantas atletas femininas participaram em uma cidade
+  const contarAtletasFemininas = (dados, cidade) =>
+    dados
+      .filter((x) => x.City === cidade && x.Sex === "F")
+      .map((x) => x.Name)
+      .filter((value, index, self) => self.indexOf(value) === index).length;
 
-// Lê o arquivo CSV e executa as operações desejadas
-lerCSV("atletas.csv")
-  .then((dados) => {
-    const cidade = "London";
-    const quantasMulheres = contarAtletasFemininas(dados, cidade);
-    console.log(
-      `Na cidade ${cidade} participaram ${quantasMulheres} mulheres.`
-    );
+  // Função para contar a quantidade de jogadores em uma cidade
+  const quantidadeJogadores = (dados, cidade) =>
+    dados
+      .filter((x) => x.City == cidade)
+      .map((x) => x.Name)
+      .reduce((nomeSemRepetir, nome) => {
+        if (!nomeSemRepetir.includes(nome)) {
+          nomeSemRepetir.push(nome);
+        }
+        return nomeSemRepetir;
+      }, []).length;
 
-    const cidadesediou = "London";
-    const VezesQueaCidadeSediou = contarVezesCidadeSediou(dados, cidadesediou);
-    console.log(`${cidadesediou} sediou ${VezesQueaCidadeSediou} vezes.`);
+  // Função para obter os anos em que uma cidade sediou os Jogos Olímpicos
+  const anosSediados = (dados, cidade) =>
+    dados
+      .filter((x) => x.City == cidade)
+      .map((x) => x.Year)
+      .reduce((anos, ano) => {
+        if (!anos.includes(ano)) {
+          anos.push(ano);
+        }
+        return anos;
+      }, []);
 
-    const a = quantidadeJogadores(dados, "Rio de Janeiro");
-    console.log(`Na cidade ${cidade} participaram ${a} atletas.`);
+  // Função para contar quantas medalhas um país ganhou em uma cidade
+  const quantasMedalhas = (pais, cidade, dados) =>
+    dados
+      .filter((x) => x.Team == pais)
+      .filter((x) => x.City == cidade)
+      .map((x) => (x.Medal != "NA" ? 1 : 0))
+      .reduce((acc, x) => acc + x, 0);
 
-    const ano = anosSediados(dados, "London");
-    console.log(`${ano}`);
+  let dadosCSV;
 
-    const b = quantasMedalhas("United States", "Rio de Janeiro", dados);
-    console.log(b);
-  })
-  .catch((error) => {
-    console.error("Erro ao ler o arquivo CSV:", error);
-  });
+  lerCSV(filePath)
+    .then((dados) => {
+      dadosCSV = dados;
+      const cidade = "London";
+      const quantasMulheres = contarAtletasFemininas(dados, cidade);
+      console.log(
+        `Na cidade ${cidade} participaram ${quantasMulheres} mulheres.`
+      );
 
-//-----------------------------------FUNÇÃO PARA PESQUISAR-------------------------
+      const cidadesediou = "London";
+      const VezesQueaCidadeSediou = contarVezesCidadeSediou(
+        dados,
+        cidadesediou
+      );
+      console.log(`${cidadesediou} sediou ${VezesQueaCidadeSediou} vezes.`);
 
-function pesquisar() {
-  // Obtém o valor digitado na barra de pesquisa
-  var input = document.getElementById("searchInput").value.toUpperCase();
-}
+      const a = quantidadeJogadores(dados, "Rio de Janeiro");
+      console.log(`Na cidade ${cidade} participaram ${a} atletas.`);
+
+      const ano = anosSediados(dados, "London");
+      console.log(`${ano}`);
+
+      const b = quantasMedalhas("United States", "Rio de Janeiro", dados);
+      console.log(b);
+    })
+    .catch((error) => {
+      console.error("Erro ao ler o arquivo CSV:", error);
+    });
+
+  // Função para pesquisar e exibir o resultado
+  function pesquisar() {
+    const input = document.getElementById("searchInput").value.toUpperCase();
+    const quantasMulheres = contarAtletasFemininas(dadosCSV, input);
+    const resultadoLabel = document.getElementById("resultado2");
+    resultadoLabel.innerHTML = `Na cidade ${input} participaram ${quantasMulheres} mulheres.`;
+  }
+
+  // Função para exibir resultado
+  function exibirResultado() {
+    // Obtém o elemento onde o resultado será exibido
+    const resultadoLabel = document.getElementById("resultado2");
+    resultadoLabel.innerHTML = quantasMulheres;
+  }
+});
