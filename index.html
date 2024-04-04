@@ -12,9 +12,9 @@
       name="viewport"
       content="width=device-width, initial-scale=1, user-scalable=no"
     />
-    <link rel="stylesheet" href="./teste site/assets/css/main.css" />
+    <link rel="stylesheet" href="./assets/css/main.css" />
     <noscript
-      ><link rel="stylesheet" href="./teste site/assets/css/noscript.css"
+      ><link rel="stylesheet" href="./assets/css/noscript.css"
     /></noscript>
   </head>
   <body class="is-preload">
@@ -73,7 +73,7 @@
           <span class="image main"
             ><img src="./images/medalhas.jpg" alt=""
           /></span>
-          <label for="title">Digite uma cidade</label>
+          <label for="title">Digite uma cidade (Edição)</label>
           <div id="searchContainer">
             <input
               type="text"
@@ -82,8 +82,18 @@
             />
             <ul id="searchResults"></ul>
           </div>
-          <label id="resultado1"></label>
-          <script location.reload()></script>
+          <label for="title">Digite um País</label>
+          <div id="searchContainer">
+            <input
+              type="text"
+              id="searchInput"
+              placeholder="Pesquise o País aqui..."
+            />
+            <p style="margin-top: 1px"></p>
+            <button onclick="pesquisar()">Pesquisar</button>
+          </div>
+          <ul id="searchResults"></ul>
+          <p id="resultado1"></p>
         </article>
 
         <!-- pergunta_2 -->
@@ -95,7 +105,7 @@
           <span class="image main"
             ><img src="images/mulheres.jpg" alt=""
           /></span>
-          <label for="title">Digite uma cidade</label>
+          <label for="title">Digite uma cidade (Edição)</label>
           <div id="searchContainer">
             <input
               type="text"
@@ -103,6 +113,8 @@
               placeholder="Pesquise a cidade aqui..."
             />
             <ul id="searchResults"></ul>
+            <p style="margin-top: 1px"></p>
+            <button onclick="pesquisar()">Pesquisar</button>
           </div>
           <label id="resultado2"></label>
         </article>
@@ -113,7 +125,7 @@
           <h2 class="major">atletas que competiram em</h2>
           <h2 class="major">uma edição das Olimpíadas</h2>
           <span class="image main"><img src="" alt="" /></span>
-          <label for="title">Digite uma cidade</label>
+          <label for="title">Digite uma cidade (Edição)</label>
           <div id="searchContainer">
             <input
               type="text"
@@ -121,6 +133,8 @@
               placeholder="Pesquise a cidade aqui..."
             />
             <ul id="searchResults"></ul>
+            <p style="margin-top: 1px"></p>
+            <button onclick="pesquisar()">Pesquisar</button>
           </div>
         </article>
 
@@ -130,7 +144,7 @@
           <h2 class="major">uma cidade sediou os</h2>
           <h2 class="major">Jogos Olímpicos</h2>
           <span class="image main"><img src="" alt="" /></span>
-          <label for="title">Digite uma cidade</label>
+          <label for="title">Digite uma cidade (Edição)</label>
           <div id="searchContainer">
             <input
               type="text"
@@ -138,6 +152,8 @@
               placeholder="Pesquise a cidade aqui..."
             />
             <ul id="searchResults"></ul>
+            <p style="margin-top: 1px"></p>
+            <button onclick="pesquisar()">Pesquisar</button>
           </div>
         </article>
 
@@ -147,7 +163,7 @@
           <h2 class="major">uma cidade específica foi</h2>
           <h2 class="major">sede dos Jogos Olímpicos</h2>
           <span class="image main"><img src="" alt="" /></span>
-          <label for="title">Digite uma cidade</label>
+          <label for="title">Digite uma cidade (Edição)</label>
           <div id="searchContainer">
             <input
               type="text"
@@ -155,6 +171,8 @@
               placeholder="Pesquise a cidade aqui..."
             />
             <ul id="searchResults"></ul>
+            <p style="margin-top: 1px"></p>
+            <button onclick="pesquisar()">Pesquisar</button>
           </div>
         </article>
       </div>
@@ -173,14 +191,14 @@
     </div>
 
     <!-- fundo -->
-    <div id="fundo"></div>
+    <div id="bg"></div>
 
     <!-- Scripts -->
-    <script src="teste site/assets/js/jquery.min.js"></script>
-    <script src="teste site/assets/js/browser.min.js"></script>
-    <script src="teste site/assets/js/breakpoints.min.js"></script>
-    <script src="teste site/assets/js/util.js"></script>
-    <script src="teste site/assets/js/main.js"></script>
-    <script src="teste site/assets/js/funcional.js"></script>
+    <script src="./assets/js/jquery.min.js"></script>
+    <script src="./assets/js/browser.min.js"></script>
+    <script src="./assets/js/breakpoints.min.js"></script>
+    <script src="./assets/js/util.js"></script>
+    <script src="./assets/js/main.js"></script>
+    <script src="./assets/js/funcional.js"></script>
   </body>
 </html>
