@@ -1470,7 +1470,7 @@ body.is-preload #bg:before {
   display: -webkit-flex;
   display: -ms-flex;
   display: flex;
-  margin-bottom: 0;
+  margin-bottom: 10;
   list-style: none;
   padding-left: 0;
   border: solid 1px #ffffff;
@@ -1478,8 +1478,9 @@ body.is-preload #bg:before {
 }
 
 #header nav ul li {
-  padding-left: 0;
+  padding-left: 10;
   border-left: solid 1px #ffffff;
+  margin-bottom: 60px;
 }
 
 #header nav ul li:first-child {
@@ -1489,17 +1490,17 @@ body.is-preload #bg:before {
 #header nav ul li a {
   display: block;
   min-width: 7.5rem;
-  height: 2.75rem;
-  line-height: 2.75rem;
+  height: 2.5rem;
+  line-height: 2rem;
   padding: 0 1.25rem 0 1.45rem;
   text-transform: uppercase;
-  letter-spacing: 0.2rem;
-  font-size: 0.8rem;
+  letter-spacing: 0.1rem;
+  font-size: 0.9rem;
   border-bottom: 0;
 }
 
 #header nav ul li a:hover {
-  background-color: rgba(255, 255, 255, 0.075);
+  background-color: rgba(219, 204, 204, 0.075);
 }
 
 #header nav ul li a:active {
