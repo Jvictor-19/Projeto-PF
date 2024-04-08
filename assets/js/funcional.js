@@ -39,3 +39,98 @@ function pesquisar1(){
     .catch(error => console.error('Erro:', error));
 }
 
+function pesquisar2() {
+  var cidade = document.getElementById("searchInput2").value.trim().toLowerCase();
+
+  pegarCSV()
+    .then(resultados => {
+      // Filtra para linhas onde a coluna 'City' é igual à cidade pesquisada e 'Sex' igual ao genêro do atleta
+      const filtrado1 = resultados.filter((x) => x.City.toLowerCase() === cidade && x.Sex === "F")
+      .map((x) => x.Name)
+      .filter((value, index, self) => self.indexOf(value) === index).length;
+
+
+     if (filtrado1 > 0) { //Condicional caso a quantidade de mulheres seja maior que zero
+      document.getElementById("resultadoPesquisa2").innerHTML = `Participaram ${filtrado1} mulheres nas Olímpiadas de ${cidade}`
+     } else {
+      document.getElementById("resultadoPesquisa2").innerHTML = `Não há dados disponíveis em ${cidade}`
+     }
+    })
+    .catch(error => console.error('Erro:', error));
+}
+
+function pesquisar3(){
+  var cidade = document.getElementById("searchInput3").value.trim().toLowerCase();
+
+  pegarCSV()
+    .then(resultados => {
+      // Filtra quando o "City" é igual a cidade buscada pelo usuário
+      const filtrado2 = resultados.filter((x) => x.City.toLowerCase() === cidade)
+      .map((x) => x.Name)
+      .reduce((nomeSemRepetir, nome) => {
+        if (!nomeSemRepetir.includes(nome)) {
+          nomeSemRepetir.push(nome);
+        }
+        return nomeSemRepetir;
+      }, []).length;
+
+     if (filtrado2 > 0) { //Usa a condicional para mostrar a quantidade de atletas
+      document.getElementById("resultadoPesquisa3").innerHTML = `Participaram ${filtrado2} atletas nas Olímpiadas de ${cidade}`
+     } else {
+      document.getElementById("resultadoPesquisa3").innerHTML = `Não há dados disponíveis em ${cidade}`
+     }
+    })
+    .catch(error => console.error('Erro:', error));
+}
+
+function pesquisar4(){
+  var cidade = document.getElementById("searchInput4").value.trim().toLowerCase();
+
+  pegarCSV()
+    .then(resultados => {
+      // Filtra para linhas onde a coluna 'City' é igual à cidade pesquisada
+      const filtrado3 = resultados.filter((x) => x.City.toLowerCase() === cidade)
+      .map((x) => x.Year)
+      .reduce((anos, ano) => {
+        if (!anos.includes(ano)) {
+          anos.push(ano);
+          }
+      return anos;
+      }, []);
+
+      if (filtrado3.length > 0) { //Usa a condicional para mostrar os anos em que uma cidade sediou o evento
+        document.getElementById("resultadoPesquisa4").innerHTML = `A cidade de ${cidade} sediou os Jogos Olímpicos em ${filtrado3}`
+      } else {
+        document.getElementById("resultadoPesquisa4").innerHTML = `Não foram encontradas informações para a cidade de ${cidade}.`;
+      }
+  })
+    .catch(error => console.error('Erro:', error));
+}
+
+function pesquisar5() {
+  // Pegando o valor inserido no campo de pesquisa
+  var cidade = document.getElementById("searchInput5").value.trim().toLowerCase();
+
+  // Chama pegarCSV() para obter os dados do CSV
+  pegarCSV()
+    .then(resultados => {
+      // Filtra para linhas onde a coluna 'City' é igual à cidade pesquisada
+      const filtrado = resultados.filter((x) => x.City.toLowerCase() === cidade)
+      .map((x) => x.Year)
+      .reduce((anos, ano) => {
+        if (!anos.includes(ano)) {
+          anos.push(ano);
+          }
+      return anos;
+      }, []);
+
+
+      // Se houver resultados, exibe na div "resultadoPesquisa5", senão exibe uma mensagem de erro
+      if (filtrado.length > 0) {
+        document.getElementById("resultadoPesquisa5").innerHTML = `A cidade de ${cidade} sediou os Jogos Olímpicos ${filtrado.length} vez(es).`;
+      } else {
+        document.getElementById("resultadoPesquisa5").innerHTML = `Não foram encontradas informações para a cidade de ${cidade}.`;
+      }
+    })
+    .catch(error => console.error('Erro:', error));
+}
