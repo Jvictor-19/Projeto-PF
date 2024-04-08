@@ -68,11 +68,9 @@ function pesquisar3(){
       const filtrado2 = resultados.filter((x) => x.City.toLowerCase() === cidade)
       .map((x) => x.Name)
       .reduce((nomeSemRepetir, nome) => {
-        if (!nomeSemRepetir.includes(nome)) {
-          nomeSemRepetir.push(nome);
-        }
-        return nomeSemRepetir;
+        return nomeSemRepetir.indexOf(nome) === -1 ? nomeSemRepetir.concat(nome) : nomeSemRepetir;
       }, []).length;
+    
 
      if (filtrado2 > 0) { //Usa a condicional para mostrar a quantidade de atletas
       document.getElementById("resultadoPesquisa3").innerHTML = `Participaram ${filtrado2} atletas nas Olímpiadas de ${cidade}`
@@ -92,10 +90,7 @@ function pesquisar4(){
       const filtrado3 = resultados.filter((x) => x.City.toLowerCase() === cidade)
       .map((x) => x.Year)
       .reduce((anos, ano) => {
-        if (!anos.includes(ano)) {
-          anos.push(ano);
-          }
-      return anos;
+        return anos.indexOf(ano) === -1 ? anos.concat(ano) : anos;
       }, []);
 
       if (filtrado3.length > 0) { //Usa a condicional para mostrar os anos em que uma cidade sediou o evento
@@ -118,11 +113,9 @@ function pesquisar5() {
       const filtrado = resultados.filter((x) => x.City.toLowerCase() === cidade)
       .map((x) => x.Year)
       .reduce((anos, ano) => {
-        if (!anos.includes(ano)) {
-          anos.push(ano);
-          }
-      return anos;
+        return anos.indexOf(ano) === -1 ? anos.concat(ano) : anos;
       }, []);
+    
 
 
       // Se houver resultados, exibe na div "resultadoPesquisa5", senão exibe uma mensagem de erro
@@ -133,4 +126,3 @@ function pesquisar5() {
       }
     })
     .catch(error => console.error('Erro:', error));
-}
