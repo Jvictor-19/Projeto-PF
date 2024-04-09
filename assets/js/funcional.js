@@ -19,11 +19,11 @@ const pegarCSV = () => {
 
 function pesquisar1() {
   // Cidade e Pais escolhidos pelo usuário.
-  var cidade = document
+  const cidade = document
     .getElementById("searchInput1.1")
     .value.trim()
     .toLowerCase();
-  var pais = document
+  const pais = document
     .getElementById("searchInput1.2")
     .value.trim()
     .toLowerCase();
@@ -43,14 +43,14 @@ function pesquisar1() {
       } else {
         document.getElementById(
           "resultadoPesquisa1"
-        ).innerHTML = `O País ${pais} não obteve medalhas nas Olimpiadas de ${cidade}.`;
+        ).innerHTML = `Não foram encontrado dados para ${pais} e ${cidade}.`;
       }
     })
     .catch((error) => console.error("Erro:", error));
 }
 
 function pesquisar2() {
-  var cidade = document
+  const cidade = document
     .getElementById("searchInput2")
     .value.trim()
     .toLowerCase();
@@ -78,7 +78,7 @@ function pesquisar2() {
 }
 
 function pesquisar3() {
-  var cidade = document
+  const cidade = document
     .getElementById("searchInput3")
     .value.trim()
     .toLowerCase();
@@ -110,7 +110,7 @@ function pesquisar3() {
 }
 
 function pesquisar4() {
-  var cidade = document
+  const cidade = document
     .getElementById("searchInput4")
     .value.trim()
     .toLowerCase();
@@ -141,7 +141,7 @@ function pesquisar4() {
 
 function pesquisar5() {
   // Pegando o valor inserido no campo de pesquisa
-  var cidade = document
+  const cidade = document
     .getElementById("searchInput5")
     .value.trim()
     .toLowerCase();
