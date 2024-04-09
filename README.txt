@@ -10,6 +10,8 @@ Euler Cruz da Silva - eulercruz458
 João Victor Pereira Santos - Jvictor-19
 José Victor Ribeiro de Jesus - josevic01
 
+link do site: https://olimpiadas-funcional.vercel.app/#
+
 Credits:
 
 	Demo Images:
